@@ -104,6 +104,10 @@ app.delete("/prompts/:prompt_id", async(req, res) => {
   }
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
+
 // Listen
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
