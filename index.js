@@ -29,6 +29,7 @@ app.post("/prompts", async(req, res) => {
     const newPrompt = await pool.query("INSERT INTO prompts (description, genre) VALUES ($1, $2) RETURNING *",
                       [description, genre]);
     res.json(newPrompt.rows[0]);
+    console.log(newPrompt.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
