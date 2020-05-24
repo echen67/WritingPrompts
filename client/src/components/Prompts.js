@@ -15,7 +15,7 @@ const Prompts = () => {
 
       // proxy
 
-      const response = await fetch('/prompts', {
+      const response = await fetch("/prompts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -29,7 +29,8 @@ const Prompts = () => {
   // Get all prompts
   const getPrompts = async () => {
     try {
-      const response = await fetch('/prompts');
+      const response = await fetch("/prompts");
+      // console.log(response);
       const jsonData = await response.json();
       setPrompts(jsonData);
     } catch(err) {

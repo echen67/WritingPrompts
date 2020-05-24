@@ -41,6 +41,7 @@ app.get("/prompts", async(req, res) => {
   try {
     const allPrompts = await pool.query("SELECT * FROM prompts");
     res.json(allPrompts.rows);
+    console.log(allPrompts.rows);
   } catch (err) {
     console.error(err.message);
   }
