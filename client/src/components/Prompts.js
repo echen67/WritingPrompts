@@ -29,7 +29,7 @@ const Prompts = () => {
   // Get all prompts
   const getPrompts = async () => {
     try {
-      const response = await fetch("/prompts");
+      const response = await fetch('/prompts');
       const jsonData = await response.json();
       setPrompts(jsonData);
     } catch(err) {
