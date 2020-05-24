@@ -12,7 +12,10 @@ const Prompts = () => {
     e.preventDefault();
     try {
       const body = { description, genre };
-      const response = await fetch('http://localhost:5000/prompts', {
+
+      // proxy
+
+      const response = await fetch('/prompts', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -26,7 +29,7 @@ const Prompts = () => {
   // Get all prompts
   const getPrompts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/prompts");
+      const response = await fetch("/prompts");
       const jsonData = await response.json();
       setPrompts(jsonData);
     } catch(err) {
@@ -37,7 +40,7 @@ const Prompts = () => {
   // Get prompts of specific genre
   const getGenrePrompts = async (g) => {
     try {
-      const response = await fetch(`http://localhost:5000/prompts/genre/${g}`);
+      const response = await fetch(`/prompts/genre/${g}`);
       const jsonData = await response.json();
       setPrompts(jsonData);
     } catch(err) {
@@ -50,7 +53,7 @@ const Prompts = () => {
     try {
       // what if search is empty string?
       console.log("searched for: ", s);
-      const response = await fetch(`http://localhost:5000/prompts/search/${s}`);
+      const response = await fetch(`/prompts/search/${s}`);
       const jsonData = await response.json();
       setPrompts(jsonData);
     } catch(err) {
