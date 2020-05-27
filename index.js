@@ -22,19 +22,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Routes
-// create a prompt
-app.post("/prompts", async(req, res) => {
-  try {
-    const { description } = req.body;
-    const { genre } = req.body;
-    const newPrompt = await pool.query("INSERT INTO prompts (description, genre) VALUES ($1, $2) RETURNING *",
-                      [description, genre]);
-    res.json(newPrompt.rows[0]);
-    console.log(newPrompt.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
 
 // get all prompts
 app.get("/prompts", async(req, res) => {
@@ -81,6 +68,20 @@ app.get("/prompts/search/:search_term", async(req, res) => {
   }
 });
 
+// create a prompt
+app.post("/prompts", async(req, res) => {
+  try {
+    const { description } = req.body;
+    const { genre } = req.body;
+    const newPrompt = await pool.query("INSERT INTO prompts (description, genre) VALUES ($1, $2) RETURNING *",
+                      [description, genre]);
+    res.json(newPrompt.rows[0]);
+    console.log(newPrompt.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 // update a prompt
 app.put("/prompts/:prompt_id", async(req, res) => {
   try {
@@ -107,9 +108,9 @@ app.delete("/prompts/:prompt_id", async(req, res) => {
   }
 });
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "client/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 // Listen
 app.listen(PORT, () => {
